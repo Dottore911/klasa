@@ -1,0 +1,107 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class figura{
+private:
+    double wymiar=0;
+
+public:
+    figura(){
+       this->wymiar=wymiar;
+       pole_figury();
+    }
+
+    virtual double pole_figury () const noexcept
+    {
+            double pole=0;
+    }
+};
+
+class kwadrat :public figura{
+    private:
+        double dl_boku=0;
+    public:
+        kwadrat(){
+            this->dl_boku=dl_boku;
+            pole_figury();
+        }
+    virtual double pole_figury () const noexcept override{
+
+        double pole= dl_boku*dl_boku;
+    }
+};
+
+class kolo :public figura{
+    private:
+        double promien=0;
+    public:
+        kolo(){
+            this->promien=promien;
+            pole_figury();
+        }
+    virtual double pole_figury () const noexcept override{
+
+        double pole= 3.14*(promien*promien);
+    }
+};
+class trojkat :public figura{
+    private:
+        double wysokosc=0;
+        double podstawa=0;
+    public:
+        trojkat(){
+            this->wysokosc=wysokosc;
+            this->podstawa=podstawa;
+            pole_figury();
+        }
+    virtual double pole_figury () const noexcept override{
+
+        double pole= (podstawa*wysokosc)/2;
+        
+    }
+};
+
+enum class rodzaj_figury {
+    nowy_trojkat, nowy_kwadrat, nowe_kolo
+};
+
+figura* stworz_figure (rodzaj_figury type){
+    switch (type) {
+    case rodzaj_figury::nowy_trojkat:
+        return new trojkat();
+    case rodzaj_figury::nowy_kwadrat:
+        return new kwadrat();
+    case rodzaj_figury::nowe_kolo:
+        return new kolo();
+    default:
+        return new figura();
+    }
+    
+}
+
+int main()
+{
+    vector<figura*>nowa_figura;
+    string nazwa_figury;
+    //nowa_figura.push_back(stworz_figure(rodzaj_figury::nowy_trojkat));
+    cout<<"podaj figure (Trojkat, Kwadrat, Kolo)"<<endl;
+    cin>>nazwa_figury;
+    switch (nazwa_figury)
+    {
+    case Trojkat:
+        nowa_figura.push_back(stworz_figure(rodzaj_figury::nowy_trojkat));
+        cout<<"podaj rozmiar podstawy"<<endl;
+        cin>>// I JAK STAD DOSTAC SIE DO WARTOSCI W KLASIE TROJKAT
+        break;
+    
+    default:
+        break;
+    }
+
+
+
+    return 0;
+}
