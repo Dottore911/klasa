@@ -10,7 +10,6 @@ private:
 
 public:
     figura(){
-       this->wymiar=wymiar;
        pole_figury();
     }
 
@@ -28,6 +27,10 @@ class kwadrat :public figura{
             this->dl_boku=dl_boku;
             pole_figury();
         }
+        kwadrat(double dl_boku){
+            this->dl_boku=dl_boku;
+            pole_figury();
+        }
     virtual double pole_figury () const noexcept override{
 
         double pole= dl_boku*dl_boku;
@@ -39,6 +42,10 @@ class kolo :public figura{
         double promien=0;
     public:
         kolo(){
+            this->promien=promien;
+            pole_figury();
+        }
+        kolo(double promien){
             this->promien=promien;
             pole_figury();
         }
@@ -57,6 +64,12 @@ class trojkat :public figura{
             this->podstawa=podstawa;
             pole_figury();
         }
+        trojkat(double podstawa, double wysokosc){
+            this->podstawa=podstawa;
+            this->wysokosc=wysokosc;
+            pole_figury();
+        }
+        
     virtual double pole_figury () const noexcept override{
 
         double pole= (podstawa*wysokosc)/2;
@@ -91,13 +104,32 @@ int main()
     cin>>nazwa_figury;
     switch (nazwa_figury)
     {
-    case Trojkat:
+    case "Trojkat":
         nowa_figura.push_back(stworz_figure(rodzaj_figury::nowy_trojkat));
-        cout<<"podaj rozmiar podstawy"<<endl;
-        cin>>// I JAK STAD DOSTAC SIE DO WARTOSCI W KLASIE TROJKAT
+        cout<<"podaj wysokosc trojkata"<<endl;
+        double wys;
+        cin>>wys;
+        cout<<"podaj dlugosc podstawy"<<endl;
+        double pods;
+        cin>>pods;
+        trojkat(pods,wys);
         break;
-    
+    case "Kwadrat":
+        nowa_figura.push_back(stworz_figure(rodzaj_figury::nowy_kwadrat));
+        cout<<"podaj dlugosc boku"<<endl;
+        double bok;
+        cin>>bok;
+        kwadrat(bok);
+        break;
+    case "Kolo":
+        nowa_figura.push_back(stworz_figure(rodzaj_figury::nowe_kolo));
+        cout<<"podaj promien kola"<<endl;
+        double prom;
+        cin>>prom;
+        kolo(prom);
+        break;
     default:
+        cout<<"nie ma takiej figury"<<endl;
         break;
     }
 
